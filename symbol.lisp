@@ -1,9 +1,4 @@
-(defpackage :hkr.utils.symbol
-  (:nicknames "hkr.sym")
-  (:use :common-lisp)
-  (:export :symb
-	   :explode
-	   :separate-symbols))
+
 
 (in-package :hkr.utils.symbol)
 	   

@@ -1,19 +1,4 @@
 
-(defpackage :hkr.utils.clos.mop
-  (:nicknames "hkr.mop")
-  (:use :common-lisp
-	:closer-mop)
-  (:import-from :metabang.mop-utilities
-		:get-class)
-  (:export :slot-definition-accessors
-	   :with-readers
-	   :superclasses
-	   :subclasses
-	   :superclasses*
-	   :subclasses*
-	   :subclasses-intersection
-	   :matching-superclasses-p
-	   :find-subclass))
 
 (in-package :hkr.utils.clos.mop)
 

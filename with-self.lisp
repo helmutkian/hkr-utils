@@ -1,15 +1,5 @@
-(defpackage :hkr.utils.clos.with-self
-  (:nicknames "hkr.with-self")
-  (:use common-lisp)
-  (:import-from :metabang.utilities
-		:flatten
-		:mapappend)
-  (:import-from :hkr.utils.clos.mop
-		:with-readers
-		:class-direct-slots)
-  (:export :with-self
-	   :defmethod-with-self))
 
+(in-package :hkr.utils.clos.with-self)
 
 (defun collect-self-components (self body)
   "Collects the accessors, readers, and slots of SELF within a given method

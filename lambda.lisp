@@ -1,14 +1,4 @@
 
-(defpackage :hkr.utils.lambda
-  (:nicknames "hkr.lambda")
-  (:use :common-lisp)
-  (:import-from :metabang.utilities
-		:flatten)
-  (:import-from :hkr.utils.symbol
-		:explode
-		:symb)
-  (:export :fn
-	   :fn*))
 
 (in-package :hkr.utils.lambda)
 
