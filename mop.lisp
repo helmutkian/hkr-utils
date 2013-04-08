@@ -1,5 +1,49 @@
 
 
+(defun standardp (class)
+  "STANDARDP class => boolean
+  
+  class -- a CLASS metaobject
+  boolean -- either T or NIL
+  
+  Retursn T if given class is STANDARD-OBJECT or STANDARD-CLASS, not just a subclass of those."
+  (or (eql class (find-class 'standard-class))
+      (eql class (find-class 'standard-object))))
+
+(defun class-superclasses (class)
+  "CLASS-SUPERCLASSES class => superclasses
+  
+   class -- a CLASS metaobject
+   superclasses -- a LIST of CLASS metaobjects
+  
+   Returns the set of all superclasses up to STANDARD-CLASS or STANDARD-OBJECT of a given class."
+  (let ((stack (class-direct-superclasses class))
+        (superclasses nil))
+    ;; Depth-first search
+  	(do ((superclass (pop stack) (pop stack)))
+      	((null stack) (remove-duplicates superclasses))
+      (push superclass superclasses)
+      (let ((supers (remove-if #'standardp (class-direct-superclasses superclass))))
+      	(when supers
+          (dolist (super supers) (push super stack)))))))
+
+(defun class-subclasses (class)
+  "CLASS-SUBCLASSES class => subclasses
+  
+   class -- a CLASS metaobject
+   subclasses -- a list of CLASS metaobjects
+  
+   Returns the set of all the subclasses of a given class."
+  (let ((stack (class-direct-subclasses class))
+        (subclasses nil))
+   	;; Depth-first search
+  	(do ((subclass (pop stack) (pop stack)))
+      	((null stack) (remove-duplicates subclasses))
+      (push subclass subclasses)
+      (awhen (class-direct-subclasses class)
+        (dolist (sub it) (push sub stack))))))
+      
+
 (in-package :hkr.utils.clos.mop)
 
 
